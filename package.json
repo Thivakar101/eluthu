@@ -2,6 +2,18 @@
   "name": "eluthu",
   "private": true,
   "version": "0.1.0",
+  "description": "Create a downloadable font from your handwriting entirely in the browser.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thivakar101/eluthu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Thivakar101/eluthu/issues"
+  },
+  "homepage": "https://github.com/Thivakar101/eluthu#readme",
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "license": "GPL-2.0-only",
   "packageManager": "pnpm@11.25.0",
   "type": "module",

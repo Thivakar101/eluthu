@@ -1,10 +1,13 @@
 node_modules
 .pnpm-store
+.vite
 *.tsbuildinfo
 dist
+coverage
 *.local
 playwright-report
 test-results
+*.log
 .env
 .env.*
 !.env.example
