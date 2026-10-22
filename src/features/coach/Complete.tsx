@@ -1,6 +1,10 @@
 import { ArrowRight } from 'lucide-react'
-import { Button, Page, SectionLabel } from '../../components/ui'
+import { Button, Page } from '../../components/ui'
 import { CHARSET } from '../../lib/charset'
 import { usePreviewFont } from '../../lib/font/usePreviewFont'
 import { useApp } from '../../store'
-export default function Complete(){const {project,setScreen,setPosition}=useApp(),font=usePreviewFont(),missing=CHARSET.filter(c=>!project.glyphs[c.char]||project.glyphs[c.char].status==='skipped'),words='Your font is ready to review.'.split(' ');return <Page className="complete-page"><SectionLabel>A page of your own</SectionLabel><div className="complete-mark" style={{fontFamily:font}}>Aa</div><h1 style={{fontFamily:font}}>{words.map((word,wordIndex)=><span className="complete-word" key={word}>{[...word].map((letter,letterIndex)=><span className="complete-letter" key={letterIndex} style={{animationDelay:`${(words.slice(0,wordIndex).join(' ').length+wordIndex+letterIndex)*25}ms`}}>{letter}</span>)}</span>)}</h1><p>{Object.values(project.glyphs).filter(g=>g.status==='done').length} letters are in place. Take a closer look, make a few adjustments, then carry them into the world.</p><div className="complete-actions"><Button kind="primary" onClick={()=>setScreen('review')}>Review your font <ArrowRight size={17}/></Button>{missing.length>0&&<Button kind="ghost" onClick={()=>{setPosition(CHARSET.indexOf(missing[0]));setScreen('coach')}}>Go back to missing letters ({missing.length})</Button>}</div></Page>}
+export default function Complete() {
+  const { project, setScreen, setPosition } = useApp(), font = usePreviewFont()
+  const missing = CHARSET.filter(c => !project.glyphs[c.char] || project.glyphs[c.char].status === 'skipped')
+  return <Page className="complete-page"><div className="complete-mark" style={{ fontFamily: font }}>Aa</div><h1>Your letters are ready</h1><p>{Object.values(project.glyphs).filter(g => g.status === 'done').length} letters, all yours.</p><div className="complete-actions"><Button kind="primary" onClick={() => setScreen('review')}>Review your font <ArrowRight size={17}/></Button>{missing.length > 0 && <Button kind="ghost" onClick={() => { setPosition(CHARSET.indexOf(missing[0])); setScreen('coach') }}>Write missing letters ({missing.length})</Button>}</div></Page>
+}

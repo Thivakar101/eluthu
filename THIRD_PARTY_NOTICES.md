@@ -17,6 +17,7 @@ Eluthu's own source is [GPL-2.0-only](LICENSE). The following bundled direct run
 | Berkshire Swash | SIL OFL-1.1 | [License](public/licenses/berkshire-swash-OFL.txt) |
 | Fraunces | SIL OFL-1.1 | [License](public/licenses/fraunces-OFL.txt) |
 | Inter | SIL OFL-1.1 | [License](public/licenses/inter-OFL.txt) |
+| Jua | SIL OFL-1.1 | [License](public/licenses/jua-OFL.txt) |
 | Noto Serif Tamil | SIL OFL-1.1 | [License](public/licenses/notoseriftamil-OFL.txt) |
 
 Transitive dependencies are pinned in `pnpm-lock.yaml`; their own package metadata and license files are available after `pnpm install`. When updating a dependency, verify its license and refresh this list and the copied notices.

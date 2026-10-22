@@ -2,12 +2,17 @@ import { chromium } from '@playwright/test'
 import fs from 'node:fs/promises'
 import { createServer } from 'vite'
 const server=await createServer({server:{host:'127.0.0.1',port:5185,strictPort:true}})
-await server.listen()
+await server.listen(); console.log('Server ready')
 const browser=await chromium.launch({headless:true,executablePath:'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',args:['--no-sandbox']})
-const errors=[]
+console.log('Browser ready'); const errors=[]
 const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1})
 page.on('pageerror',error=>errors.push(error.message))
-await page.goto('http://127.0.0.1:5185/')
+await page.goto('http://127.0.0.1:5185/'); console.log('Page loaded')
+await page.evaluate(() => document.fonts.ready.then(() => true)); console.log('Fonts ready')
+await fs.mkdir('docs/screens',{recursive:true})
+await page.setViewportSize({width:802,height:521})
+await page.waitForTimeout(500)
+await page.screenshot({path:'docs/screens/home-reference-802.png',fullPage:true})
 await page.evaluate(async()=>{
   const {useApp}=await import('/src/store.ts')
   const base=useApp.getState().project

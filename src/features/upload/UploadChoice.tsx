@@ -1,5 +1,14 @@
-import { ArrowRight, Download, FileImage, LayoutGrid } from 'lucide-react'
-import { Page, SectionLabel } from '../../components/ui'
+import { FileImage, LayoutGrid, Download } from 'lucide-react'
+import { Page } from '../../components/ui'
 import { useApp } from '../../store'
 import { downloadTemplate } from '../../lib/imaging/template'
-export default function UploadChoice(){const {setMode,setScreen}=useApp();return <Page className="choice-page"><SectionLabel>Bring your writing in</SectionLabel><h1>How would you like to upload?</h1><p>Choose the pace that suits the pages you already have.</p><div className="choice-grid"><button className="choice-card" onClick={()=>{setMode('upload');setScreen('coach')}}><FileImage size={28} strokeWidth={1.4}/><span className="recommended">Recommended</span><h2>One letter at a time</h2><p>Photograph or scan each letter. We’ll guide you through them, one by one.</p><ArrowRight className="choice-arrow" size={21}/></button><button className="choice-card" onClick={()=>setScreen('sheet')}><LayoutGrid size={28} strokeWidth={1.4}/><h2>A whole sheet</h2><p>Use our printable sheet, or upload a page of letters you’ve already written.</p><ArrowRight className="choice-arrow" size={21}/></button></div><div className="choice-footer">Starting fresh on paper? <button className="text-link" onClick={()=>downloadTemplate('pdf')}><Download size={16}/> Download the printable sheet</button></div></Page>}
+export default function UploadChoice() {
+  const { setMode, setScreen } = useApp()
+  return <Page className="choice-page"><h1>Upload your writing</h1>
+    <div className="choice-grid">
+      <button className="choice-card" onClick={() => { setMode('upload'); setScreen('coach') }}><FileImage /><h2>One letter</h2><p>bring a photo or scan<br/>of each letter</p></button>
+      <button className="choice-card" onClick={() => setScreen('sheet')}><LayoutGrid /><h2>A whole sheet</h2><p>upload a page<br/>of your writing</p></button>
+    </div>
+    <div className="choice-footer"><button className="text-link" onClick={() => downloadTemplate('pdf')}><Download size={18}/>Download a Printable sheet</button></div>
+  </Page>
+}

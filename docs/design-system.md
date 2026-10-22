@@ -1,43 +1,21 @@
 # Eluthu design system
 
-## Milk and orange
+## Supplied visual reference
 
-The interface uses a milk canvas (`#FDFDF1`) and a vivid orange (`#EC5E27`). The orange appears in primary actions, the main capture card, illustration, focus, and display accents. Dark brown keeps small copy readable. Each screen has one prominent action, with shadow reserved for floating tools and the letter editor.
+The home page follows the supplied 802 x 521 mockup: light sand (#F5EBD0), wine red (#7F011F), rounded eluthu lettering, two red action cards, and a small download link. The original logo is used in the header.
 
-## Color
+The wordmark is selectable HTML text in self-hosted [Jua](https://fonts.google.com/specimen/Jua), the closest visual match selected after comparing Jua, Baloo 2, Lilita One, and DynaPuff. It is an approximation, not an exact identification of the reference font. Labels use self-hosted Inter. Both font licenses are in `public/licenses/`. Only the header logo (`public/brand/logo.png`) is a raster UI asset. [Lucide Camera](https://lucide.dev/icons/camera), [Sparkle](https://lucide.dev/icons/sparkle), and Download are inline SVG components from the existing `lucide-react` dependency. No part of the reference screenshot is shipped in the application. User font previews continue to show the generated handwriting, with Fraunces for missing characters.
 
-The source of truth is `src/styles/tokens.css`. Components use the named variables rather than literal colors.
+## Layout and controls
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--paper` | `#FDFDF1` | Page background |
-| `--paper-raised` | `#FFFEF8` | Sheets and cards |
-| `--paper-sunken` | `#F7EFE1` | Wells and missing tiles |
-| `--ink` | `#28170F` | Main text and strokes |
-| `--ink-soft` | `#5A4031` | Supporting text |
-| `--ink-faint` | `#796251` | Guides and placeholders |
-| `--line` | `#EAD9C5` | Hairlines |
-| `--line-strong` | `#DDBEA5` | Strong borders and baseline |
-| `--accent` | `#EC5E27` | Orange fills and large display accents |
-| `--accent-ink` | `#AE3E11` | Small orange text with stronger contrast |
-| `--accent-wash` | `#FFE5D4` | Selected surfaces |
+`src/styles/tokens.css` defines the palette. `src/styles/brand.css` applies the reference to all screens. Use sand and wine red throughout, short sentence-case labels, rounded red cards, thin outline icons, and no decorative grain or shadows. The home grid scales with the viewport; below 700px, the wordmark and action cards stack vertically. Live type scales with its container. Short windows can scroll; do not clip content to force a fixed page height.
 
-`--success`, `--warn`, and `--danger` signal status without overtaking the page. The app has one palette, independent of operating system theme settings.
+Mobile screens use larger touch targets and a separate row for pen thickness. Inputs use at least 16px text to avoid focus zoom. Safe-area padding accounts for phone notches and home indicators. The drawing canvas responds to available screen height while keeping a usable minimum. On laptops, the drawing actions and review link share a row. On phones, export downloads appear before the specimen. The review size and spacing sliders remain functional at every width; avoid overriding their inline values with `!important`.
 
-## Type and layout
+Drawing, upload, review, export, and completion retain their functionality with the same minimal styling. Editing surfaces use a thin wine red border. Primary controls are red with sand text. Secondary controls use a thin outline. The logo returns to Home. Existing handwriting resumes through Write it; saved project files can be opened from Export.
 
-- Berkshire Swash, an open-licensed retro display serif, is used for headings, the wordmark, and the large prompted letter. Inter is used for controls and reading copy. Fraunces remains a fallback for missing glyphs in the user's generated font preview. Noto Serif Tamil is limited to the Tamil wordmark subtitle.
-- Content width is capped at 1120px; the Letter Coach uses a narrower 760px column.
-- Body copy uses a relaxed line height and short measure. Micro labels are sparing, uppercase, and letter-spaced.
-- Controls are pill-shaped; cards and glyph tiles use rounded corners and one-pixel borders. The drawing surface has a larger 24px radius.
-- The fixed paper grain is a barely visible SVG noise layer.
+Focus outlines, accessible labels, reduced motion, and status announcements remain available. Avoid adding promotional text, ornamental labels, or extra colors.
 
-## Motion and interaction
+## Visual checks
 
-The motion vocabulary is fade, slight vertical travel, and restrained scaling with `cubic-bezier(.22,1,.36,1)`. The coach prompt blurs softly during letter changes. Glyph tiles arrive in a short stagger; traced ink reveals from left to right. A progress line grows in place. Reduced-motion users get simplified transitions.
-
-Interactive controls have visible focus, hover, press, disabled, and busy states. The drawing surface prevents touch scrolling during a stroke. Icon-only controls have accessible labels and native title tooltips. Status and errors use live regions where their timing matters.
-
-## Living reference
-
-Open `/design` while running the app to view color, typography, components, and motion on the actual site. The screenshot set in `docs/screens/` records the primary screens at mobile, tablet, and desktop widths.
+`scripts/qa.mjs` records the home page at the reference dimensions and all nine primary screen states at 375, 768, and 1440 pixels. `scripts/overflow-check.mjs` checks eight user-facing states at twelve viewport sizes, including 320px phones, landscape, and 1280 x 720 / 1366 x 768 laptops. It verifies live text, local fonts, absence of screenshot slices, clipping, and visible laptop drawing actions. Screenshots are saved in `docs/screens/`. Run `scripts/flow-check.mjs` to exercise drawing, persistence, downloads, and both upload paths, and `scripts/mobile-check.mjs` for touch drawing, mobile preview controls, settings, and font download.

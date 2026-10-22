@@ -1,16 +1,25 @@
-import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, Download, LockKeyhole, PenLine, ScanLine } from 'lucide-react'
-import { Page, SectionLabel } from '../../components/ui'
+import { Page } from '../../components/ui'
+import { Camera, Download, Sparkle } from 'lucide-react'
 import { useApp } from '../../store'
 import { downloadTemplate } from '../../lib/imaging/template'
-import type { Project } from '../../lib/model'
-const samples = ['Hello', 'வணக்கம்', 'Dear Amma', 'Notes']
+
 export default function Home() {
-  const { project, setScreen, setMode, setProject, setToast } = useApp(),importInput=useRef<HTMLInputElement>(null)
-  const [sample, setSample] = useState(0)
-  useEffect(() => { const id = window.setInterval(() => setSample(i => (i + 1) % samples.length), 2500); return () => clearInterval(id) }, [])
-  const start = (mode: 'draw' | 'upload') => { setMode(mode); setScreen(mode === 'draw' ? 'coach' : 'upload-choice') }
-  const count = Object.values(project.glyphs).filter(g => g.status === 'done').length
-  const importProject=async(file:File)=>{try{const value=JSON.parse(await file.text()) as Project;if(!value||typeof value.name!=='string'||typeof value.glyphs!=='object'||typeof value.settings!=='object'||!Number.isInteger(value.coachPosition))throw new Error('This is not an Eluthu project file.');setProject(value);setScreen('review');setToast('Project opened.')}catch(error){setToast(error instanceof Error?error.message:'This file could not be opened.')}}
-  return <Page className="home"><div className="home-copy"><SectionLabel>A handwriting studio, on your device</SectionLabel><h1>Turn your <em>handwriting</em> into a font.</h1><p>Write one letter at a time. Make something that sounds like you, even on a screen.</p><div className="sample-line"><span className="sample-rule"/>A little preview <span className="sample-word" key={sample}>{samples[sample]}</span></div>{count > 0 && <button className="continue-link" onClick={() => setScreen('review')}>Continue your last font <span>· {count} letters</span><ArrowRight size={17}/></button>}</div><div className="home-cards"><button className="path-card" onClick={() => start('draw')}><div className="card-illustration"><svg viewBox="0 0 300 170" fill="none" aria-hidden="true"><path d="M35 130 C54 126 53 48 85 48 C113 48 90 139 123 130 C149 122 153 59 173 63 C194 67 181 131 210 121 C234 113 245 75 266 38"/></svg></div><div className="path-card-bottom"><div><span className="path-eyebrow"><PenLine size={15}/> Start with a blank page</span><h2>Write it</h2><p>Draw each letter here, at your own pace.</p></div><ArrowRight className="card-arrow" size={22} strokeWidth={1.5}/></div></button><button className="path-card" onClick={() => start('upload')}><div className="card-illustration upload-illustration"><svg viewBox="0 0 300 170" fill="none" aria-hidden="true"><path d="M59 128 C84 96 91 57 119 60 C140 63 115 132 149 129 C177 126 177 58 204 54 C232 50 220 112 250 128"/><path d="M46 40 L46 26 L61 26 M254 40 L254 26 L239 26 M46 128 L46 144 L61 144 M254 128 L254 144 L239 144"/></svg></div><div className="path-card-bottom"><div><span className="path-eyebrow"><ScanLine size={15}/> Already on paper</span><h2>Upload it</h2><p>Bring a photo or scan of your writing.</p></div><ArrowRight className="card-arrow" size={22} strokeWidth={1.5}/></div></button></div><div className="home-bottom"><div className="home-links"><button className="text-link" onClick={() => downloadTemplate('pdf')}><Download size={16}/> Download a printable sheet</button><button className="text-link" onClick={()=>importInput.current?.click()}>Open a saved project</button><input ref={importInput} className="sr-only" type="file" accept=".json,application/json" onChange={e=>{if(e.target.files?.[0])void importProject(e.target.files[0])}}/></div><span><LockKeyhole size={14}/> Everything stays on your device.</span></div></Page>
+  const { setScreen, setMode } = useApp()
+  return <Page className="home">
+    <div className="home-copy">
+      <h1>eluthu</h1>
+      <p>Turn your handwriting into a font</p>
+    </div>
+    <div className="home-cards">
+      <button className="path-card write-card" onClick={() => { setMode('draw'); setScreen('coach') }}>
+        <span className="home-icon home-sparkles" aria-hidden="true"><Sparkle preserveAspectRatio="none" /><Sparkle preserveAspectRatio="none" /></span>
+        <div className="path-card-copy"><h2>Write it</h2><p>draw each letter at<br/>your own pace</p></div>
+      </button>
+      <button className="path-card upload-card" onClick={() => setScreen('upload-choice')}>
+        <Camera className="home-icon home-camera" aria-hidden="true" />
+        <div className="path-card-copy"><h2>Upload</h2><p>bring a photo or scan<br/>of your writing</p></div>
+      </button>
+    </div>
+    <div className="home-bottom"><button className="text-link" onClick={() => downloadTemplate('pdf')}><Download size={21} aria-hidden="true" />Download a Printable sheet</button></div>
+  </Page>
 }

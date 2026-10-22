@@ -1,4 +1,8 @@
 :root {
-  --paper:#FDFDF1; --paper-raised:#FFFEF8; --paper-sunken:#F7EFE1; --ink:#28170F; --ink-soft:#5A4031; --ink-faint:#796251; --line:#EAD9C5; --line-strong:#DDBEA5; --accent:#EC5E27; --accent-hover:#F17141; --accent-ink:#AE3E11; --accent-wash:#FFE5D4; --success:#3F6B52; --warn:#965116; --danger:#A23B3B;
-  --ease-out:cubic-bezier(.22,1,.36,1); --ease-in-out:cubic-bezier(.65,0,.35,1); --shadow:0 1px 2px rgba(22,21,15,.04),0 12px 32px -8px rgba(22,21,15,.12);
+  --paper:#F5EBD0; --paper-raised:#F5EBD0; --paper-sunken:#EFE2BF;
+  --ink:#7F011F; --ink-soft:#7F011F; --ink-faint:#925367;
+  --line:#D8B9B1; --line-strong:#B9868B;
+  --accent:#7F011F; --accent-hover:#680019; --accent-ink:#7F011F; --accent-wash:#EAD5BF;
+  --success:#7F011F; --warn:#7F011F; --danger:#7F011F;
+  --ease-out:cubic-bezier(.22,1,.36,1); --ease-in-out:cubic-bezier(.65,0,.35,1); --shadow:none;
 }
