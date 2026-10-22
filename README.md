@@ -17,7 +17,7 @@ Open the URL printed by Vite. `pnpm build` checks TypeScript and produces `dist/
 
 1. Choose **Write it** to draw with mouse, pen, or touch, or **Upload it** to provide a photo of each letter or a whole sheet.
 2. Work through the Letter Coach. You can jump to a letter, skip one, and return through the review screen.
-3. Open **Review** to inspect letters, adjust their outlines and spacing, and type a sample in the live font.
+3. Open **Review** to inspect letters, adjust their outlines and spacing, and type a sample in the live font. Letter widths follow the ink outline automatically; the editor can override an individual width, and the preview spacing control adds tracking.
 4. Open **Export** to download a font or a ZIP containing every format and the specimen.
 
 The printable A4 sheet is available as PNG or PDF from the home and sheet screens. A sample photo is available in the individual upload flow. Projects are saved automatically; save a project JSON copy from Export and open it from Home. The hidden `/design` route documents the live UI kit.

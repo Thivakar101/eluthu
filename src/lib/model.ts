@@ -6,6 +6,7 @@ export interface Glyph {
   svgPathData: string
   advanceWidth: number
   lsb: number
+  spacingMode?: 'auto' | 'manual'
   source: GlyphSource
   sourceImage?: string
   status: GlyphStatus
