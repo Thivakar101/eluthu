@@ -5,3 +5,8 @@ dist
 *.local
 playwright-report
 test-results
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

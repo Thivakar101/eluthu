@@ -2,9 +2,11 @@
 
 Eluthu turns handwriting into a downloadable Latin font entirely in the browser. Draw each letter, upload individual photos, or trace a printed sheet. The app stores projects in IndexedDB on the current device and makes OTF, TTF, WOFF2, ZIP, and an HTML specimen locally. It has no server or analytics.
 
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, code structure, and pull request guidance.
+
 ## Run locally
 
-Use Node.js 20+ and pnpm.
+Use Node.js 22.13+ and pnpm 11. Corepack can install the version declared in `package.json`.
 
 ```sh
 pnpm install
@@ -55,4 +57,4 @@ Run `pnpm test` and `pnpm build`. Browser scripts in `scripts/` exercise drawing
 
 The longer product brief governs the visual system where the two briefs differ. The ordered set contains 89 characters because it includes the full punctuation list; the briefs’ “78” count was illustrative. The UI uses the exact light and dark color tokens in [`docs/design-system.md`](docs/design-system.md). On narrow screens the review editor becomes a full-width panel so the lettering remains legible. The grid uses compact tiles at 375 pixels rather than shrinking letterforms further.
 
-Fraunces, Inter, and Noto Serif Tamil are self-hosted WOFF2 assets. Potrace tracing is provided by [`esm-potrace-wasm`](https://github.com/tomayac/esm-potrace-wasm), which is GPL-2.0 licensed. Review that license and its obligations before distributing a derivative build. Its license text is included at [`public/licenses/esm-potrace-wasm-GPL-2.0.txt`](public/licenses/esm-potrace-wasm-GPL-2.0.txt). Font generation uses the licenses of `opentype.js` and `fonteditor-core` as declared by those packages. The fonts exported from a user’s own handwriting carry a personal-use license note in the font name table; users should set their own licensing terms before distributing those fonts.
+Eluthu's source code is licensed under [GPL-2.0-only](LICENSE), because its Potrace tracing dependency uses GPL-2.0. Contributions to this repository are under the same license. Self-hosted Fraunces, Inter, and Noto Serif Tamil fonts have separate [SIL Open Font License notices](public/licenses). Other dependency notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and `public/licenses/dependencies/`. Fonts that users export from their own handwriting are their own works; the app's source license does not automatically license those exports.

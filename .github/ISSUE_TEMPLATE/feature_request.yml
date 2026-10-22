@@ -1,0 +1,16 @@
+name: Feature request
+description: Suggest an improvement to Eluthu
+title: "Feature: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would this help you do?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Suggested approach
+      description: Describe the interaction or workflow you have in mind.
