@@ -40,7 +40,7 @@ Image processing and font generation run in module Web Workers. A single uploade
 
 ## Checks and visual QA
 
-Run `pnpm test` and `pnpm build`. Browser scripts in `scripts/` exercise drawing, upload, template detection, PDF generation, and all three font signatures. `scripts/qa.mjs` captures all nine primary screens at 375, 768, and 1440 pixels in the wine red and light sand theme. Responsive screenshots, including phone, laptop, and supplied reference dimensions, are in [`docs/screens`](docs/screens). The generated PDF was rendered and visually inspected at A4 size.
+Run `pnpm test` and `pnpm build`. Browser scripts in `scripts/` exercise drawing, upload, template detection, PDF generation, and all three font signatures. `scripts/qa.mjs` captures all nine primary screens at 375, 768, and 1440 pixels in the wine red and light sand theme. The generated PDF was rendered and visually inspected at A4 size.
 
 ## Current limits
 
@@ -55,6 +55,6 @@ Run `pnpm test` and `pnpm build`. Browser scripts in `scripts/` exercise drawing
 
 ## Design decisions and licensing
 
-The ordered set contains 89 characters because it includes the full punctuation list. The interface uses a single wine red and light sand palette documented in [`docs/design-system.md`](docs/design-system.md). On narrow screens the review editor becomes a full-width panel so the lettering remains legible. The grid uses compact tiles at 375 pixels rather than shrinking letterforms further.
+The ordered set contains 89 characters because it includes the full punctuation list. The interface uses a single wine red and light sand palette implemented in `src/styles`. On narrow screens the review editor becomes a full-width panel so the lettering remains legible. The grid uses compact tiles at 375 pixels rather than shrinking letterforms further.
 
 Eluthu's source code is licensed under [GPL-2.0-only](LICENSE), because its Potrace tracing dependency uses GPL-2.0. Contributions to this repository are under the same license. Self-hosted Jua, Berkshire Swash, Fraunces, Inter, and Noto Serif Tamil fonts have separate [SIL Open Font License notices](public/licenses). Other dependency notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and `public/licenses/dependencies/`. Fonts that users export from their own handwriting are their own works; the app's source license does not automatically license those exports.
