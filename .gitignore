@@ -1,0 +1,7 @@
+node_modules
+.pnpm-store
+*.tsbuildinfo
+dist
+*.local
+playwright-report
+test-results
