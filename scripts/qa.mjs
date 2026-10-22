@@ -1,13 +1,13 @@
 import { chromium } from '@playwright/test'
 import fs from 'node:fs/promises'
 import { createServer } from 'vite'
-const server=await createServer({server:{host:'127.0.0.1',port:5173}})
+const server=await createServer({server:{host:'127.0.0.1',port:5185,strictPort:true}})
 await server.listen()
 const browser=await chromium.launch({headless:true,executablePath:'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',args:['--no-sandbox']})
 const errors=[]
 const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1})
 page.on('pageerror',error=>errors.push(error.message))
-await page.goto('http://127.0.0.1:5173/')
+await page.goto('http://127.0.0.1:5185/')
 await page.evaluate(async()=>{
   const {useApp}=await import('/src/store.ts')
   const base=useApp.getState().project
@@ -19,13 +19,12 @@ await page.evaluate(async()=>{
   await saveProject(project)
 })
 await fs.mkdir('docs/screens',{recursive:true})
-for(const width of [375,768,1440])for(const theme of ['light','dark']){
+for(const width of [375,768,1440]){
   await page.setViewportSize({width,height:900})
-  await page.evaluate(async(theme)=>{const {useApp}=await import('/src/store.ts');useApp.getState().setTheme(theme)},theme)
   for(const [screen,mode] of [['home','draw'],['design','draw'],['coach','draw'],['coach','upload'],['upload-choice','upload'],['sheet','upload'],['review','draw'],['export','draw'],['complete','draw']]){
     await page.evaluate(async({screen,mode})=>{const {useApp}=await import('/src/store.ts');useApp.getState().setMode(mode);useApp.getState().setScreen(screen)},{screen,mode})
     await page.waitForTimeout(screen==='complete'?1500:550)
-    await page.screenshot({path:`docs/screens/${screen}${screen==='coach'?'-'+mode:''}-${width}-${theme}.png`,fullPage:true})
+    await page.screenshot({path:`docs/screens/${screen}${screen==='coach'?'-'+mode:''}-${width}.png`,fullPage:true})
   }
 }
 await page.setViewportSize({width:1440,height:900})

@@ -14,6 +14,7 @@ Eluthu's own source is [GPL-2.0-only](LICENSE). The following bundled direct run
 | perfect-freehand | MIT | [License](public/licenses/dependencies/perfect-freehand-MIT.txt) |
 | React and React DOM | MIT | [React](public/licenses/dependencies/react-MIT.txt), [React DOM](public/licenses/dependencies/react-dom-MIT.txt) |
 | Zustand | MIT | [License](public/licenses/dependencies/zustand-MIT.txt) |
+| Berkshire Swash | SIL OFL-1.1 | [License](public/licenses/berkshire-swash-OFL.txt) |
 | Fraunces | SIL OFL-1.1 | [License](public/licenses/fraunces-OFL.txt) |
 | Inter | SIL OFL-1.1 | [License](public/licenses/inter-OFL.txt) |
 | Noto Serif Tamil | SIL OFL-1.1 | [License](public/licenses/notoseriftamil-OFL.txt) |

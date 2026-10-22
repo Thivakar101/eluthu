@@ -8,13 +8,11 @@ interface AppState {
   project: Project
   screen: Screen
   mode: Mode
-  theme: 'light' | 'dark'
   hydrated: boolean
   toast: string
   setProject: (project: Project) => void
   setScreen: (screen: Screen) => void
   setMode: (mode: Mode) => void
-  setTheme: (theme: 'light' | 'dark') => void
   setToast: (toast: string) => void
   setPosition: (position: number) => void
   saveGlyph: (glyph: Glyph) => void
@@ -27,11 +25,10 @@ interface AppState {
 const initial = newProject()
 const persist = (project: Project) => { void saveProject(project).catch(() => {}) }
 export const useApp = create<AppState>((set, get) => ({
-  project: initial, screen: location.pathname === '/design' ? 'design' : 'home', mode: 'draw', theme: (localStorage.getItem('eluthu-theme') as 'light' | 'dark') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), hydrated: false, toast: '',
+  project: initial, screen: location.pathname === '/design' ? 'design' : 'home', mode: 'draw', hydrated: false, toast: '',
   setProject: project => { persist(project); set({ project, hydrated: true }) },
   setScreen: screen => { history.pushState({}, '', screen === 'design' ? '/design' : '/'); set({ screen }) },
   setMode: mode => set({ mode }),
-  setTheme: theme => { localStorage.setItem('eluthu-theme', theme); set({ theme }) },
   setToast: toast => set({ toast }),
   setPosition: position => { const project = { ...get().project, coachPosition: Math.max(0, Math.min(CHARSET.length - 1, position)), updatedAt: Date.now() }; persist(project); set({ project }) },
   saveGlyph: glyph => { const current = get().project; const glyphs = { ...current.glyphs, [glyph.char]: glyph }; const next = nextUnfinished(glyphs, current.coachPosition); const settings=current.coachPosition===2?{...current.settings,showGhost:false}:current.settings; const project = { ...current, glyphs, settings, coachPosition: next < CHARSET.length ? next : current.coachPosition, updatedAt: Date.now() }; persist(project); set({ project, screen: next === CHARSET.length ? 'complete' : 'coach', toast: 'Lovely.' }) },

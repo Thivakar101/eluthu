@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "Berkshire Swash";
+  src: url("/fonts/berkshire-swash.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+html { color-scheme: light; }
+
+/* The warm milk canvas and orange lettering stay consistent on every screen. */
+.global-header { border-top: 4px solid var(--accent); }
+.wordmark,
+h1,
+h2,
+h3,
+.sample-word,
+.prompt-letter,
+.complete-mark,
+.font-title,
+.empty-filter,
+.web-use > button,
+.design-page .type-samples .display-sample,
+.design-page .type-samples .headline-sample {
+  font-family: "Berkshire Swash", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.025em;
+  line-height: 1.14;
+}
+.wordmark {
+  color: var(--accent);
+  font-size: 31px;
+  line-height: 1;
+}
+.wordmark span { margin-top: 3px; }
+.section-label { color: var(--accent-ink); }
+.home h1 { font-size: clamp(56px, 6vw, 88px); line-height: 1.08; }
+.home h1 em { color: var(--accent); font-style: normal; }
+.sample-word { color: var(--accent); font-size: 24px; font-style: normal; }
+
+/* Give the orange a real surface, while retaining dark text for small copy. */
+.path-card:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.path-card:first-child .card-illustration {
+  background: color-mix(in srgb, var(--accent) 90%, var(--paper));
+}
+.path-card:first-child .card-illustration svg { stroke: var(--paper); }
+.path-card:first-child h2 { color: var(--paper); }
+.path-card:first-child p,
+.path-card:first-child .path-eyebrow,
+.path-card:first-child .card-arrow { color: var(--ink); }
+.path-card:not(:first-child) .card-illustration { background: var(--accent-wash); }
+.path-card:not(:first-child) .card-illustration svg { stroke: var(--accent-ink); }
+.path-card h2 { font-size: 32px; }
+.path-card:hover { box-shadow: 0 12px 28px -18px var(--ink-soft); }
+.choice-card:hover { border-color: var(--accent); }
+
+.button-primary,
+.button-primary:not(:disabled):hover {
+  color: var(--ink);
+}
+.continue-link,
+.text-link:hover,
+.chip.active,
+.letter-chip.current,
+.draw-tools [aria-pressed=true] { color: var(--accent-ink); }
+.segments button.active { background: var(--accent); color: var(--ink); }
+.prompt-letter,
+.complete-mark { color: var(--accent); }
+.preview-dock { border-top: 2px solid var(--accent); }
+
+@media (max-width: 600px) {
+  .wordmark { font-size: 27px; }
+  .home h1 { font-size: clamp(51px, 12vw, 72px); }
+  .path-card h2 { font-size: 30px; }
+}
