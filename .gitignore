@@ -7,6 +7,8 @@ coverage
 *.local
 playwright-report
 test-results
+# Local video exports, narration, screenshots, and editable media sources
+/artifacts/
 *.log
 .env
 .env.*
